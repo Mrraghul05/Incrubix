@@ -1,0 +1,9 @@
+key: assisted
+version: 1.0.0
+tier: assisted
+auth: none
+surfaces: [{key: submission, content_types: [text, image, video_link], spec: {title_max_chars: 10000, body_max_chars: 100000, links_allowed: true}}]
+rate_limits: {per_connection: {requests: 1, per_seconds: 1}}
+capabilities: [build_assist_pack]
+error_map: {}
+instance_param: submit_url

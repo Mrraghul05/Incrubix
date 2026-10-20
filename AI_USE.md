@@ -1,0 +1,5 @@
+# AI use disclosure
+
+OpenAI Codex was used as a coding assistant to inspect the supplied assessment, draft and review implementation code and documentation, and help build tests. During submission preparation, Codex also reviewed the project against the brief, prepared and updated the clearly labeled Excel submission-form draft and evidence index, and checked dependency-license metadata. XlsxWriter and openpyxl were used only to create and update the draft workbook; neither is a product runtime dependency. The model used for this preparation session was GPT-6; the model identifiers for earlier implementation sessions are not recorded in the workspace and must be confirmed by the candidate before final submission. The candidate must review, understand, run, and be able to explain all submitted work.
+
+No AI model or AI-provider API is called by the application at runtime. No AI-generated media is included. No separate paid inference API was used in the application. Public PyPI project metadata was consulted only to check dependency licensing; no external webpage content or dataset is bundled into the product.

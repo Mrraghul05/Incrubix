@@ -1,0 +1,21 @@
+services:
+  api:
+    build: .
+    ports: ["8000:8000"]
+    environment:
+      DATABASE_PATH: /data/incubrix.sqlite3
+      DESTINATIONS_FILE: /srv/app/config/destinations.yaml
+      SIMULATION_MODE: "true"
+      WEBHOOK_SECRET: ${WEBHOOK_SECRET:-local-demo-secret}
+    volumes:
+      - app_data:/data
+      - ./artifacts:/srv/app/artifacts
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/ready')"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+  # Native Lemmy and Ghost stacks are intentionally not included yet: their
+  # multi-service setup and real publish/delete flow have not been verified.
+volumes:
+  app_data:

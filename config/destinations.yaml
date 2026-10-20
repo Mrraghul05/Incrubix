@@ -1,0 +1,38 @@
+- id: discourse-local
+  name: Local Discourse simulation
+  platform_key: discourse
+  url: http://discourse.local
+  frequency_cap: 5
+  self_promo_allowed: true
+  link_policy: allowed
+  connection: {mode: simulation}
+- id: lemmy-local
+  name: Local Lemmy simulation
+  platform_key: lemmy
+  url: http://lemmy.local
+  frequency_cap: 5
+  connection: {mode: simulation}
+- id: devto-sandbox
+  name: Dev.to sandbox simulation
+  platform_key: devto
+  url: https://dev.to
+  frequency_cap: 5
+  connection: {mode: simulation}
+- id: ghost-local
+  name: Local Ghost simulation
+  platform_key: ghost
+  url: http://ghost.local
+  frequency_cap: 5
+  connection: {mode: simulation}
+- id: partner-webhook
+  name: Partner webhook simulation
+  platform_key: signed_webhook
+  url: https://partner.invalid
+  frequency_cap: 5
+  connection: {mode: simulation, secret_env: WEBHOOK_SECRET}
+- id: assisted-community
+  name: Manual community
+  platform_key: assisted
+  url: https://community.invalid/submit
+  automation_allowed: false
+  connection: {mode: assisted, submit_url: https://community.invalid/submit}

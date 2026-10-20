@@ -1,0 +1,15 @@
+.env
+.venv/
+.vendor*/
+.pytest*/
+*.egg-info/
+__pycache__/
+data/
+*.sqlite3*
+IncuBrix_Assessment_4_Distribution_Long_Tail_Destination_Network_Brief.pdf
+artifacts/*
+!artifacts/.gitkeep
+!artifacts/test-results.md
+!artifacts/submission-evidence-index.md
+!artifacts/test-run-logs/
+!artifacts/test-run-logs/**

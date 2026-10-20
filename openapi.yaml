@@ -1,0 +1,94 @@
+openapi: 3.1.0
+info:
+  title: IncuBrix Long-Tail Connector Service
+  version: 0.1.0
+  description: Configuration-driven connector service; simulation is not live certification.
+servers:
+  - url: http://localhost:8000
+paths:
+  /api/v1/health:
+    get:
+      summary: Versioned liveness alias
+      responses:
+        '200': {description: Healthy}
+  /api/v1/ready:
+    get:
+      summary: Versioned readiness alias
+      responses:
+        '200': {description: Ready}
+  /health:
+    get:
+      summary: Liveness
+      responses:
+        '200': {description: Healthy}
+  /ready:
+    get:
+      summary: Readiness
+      responses:
+        '200': {description: Ready}
+  /api/v1/connectors:
+    get:
+      summary: List connector manifests
+      responses:
+        '200': {description: Connector manifests}
+  /api/v1/connectors/{connector_key}/manifest:
+    get:
+      summary: Get a connector manifest
+      parameters:
+        - {name: connector_key, in: path, required: true, schema: {type: string}}
+      responses:
+        '200': {description: Manifest}
+  /api/v1/destinations:
+    get:
+      summary: List configured destinations
+      responses:
+        '200': {description: Catalogue}
+    post:
+      summary: Add or update destination configuration
+      responses:
+        '200': {description: Destination}
+  /api/v1/publish:
+    post:
+      summary: Validate rules and idempotently publish
+      parameters:
+        - {name: Idempotency-Key, in: header, required: true, schema: {type: string}}
+      responses:
+        '200': {description: Post result}
+        '409': {description: Idempotency conflict}
+        '422': {description: Validation blocked}
+  /api/v1/certifications:
+    post:
+      summary: Start asynchronous certification
+      parameters:
+        - {name: Idempotency-Key, in: header, required: true, schema: {type: string}}
+      responses:
+        '202': {description: Job queued}
+  /api/v1/jobs/{job_id}:
+    get:
+      summary: Get job status and result links
+      parameters:
+        - {name: job_id, in: path, required: true, schema: {type: string}}
+      responses:
+        '200': {description: Job status}
+  /api/v1/certifications/{certification_id}:
+    get:
+      summary: Retrieve certification evidence
+      parameters:
+        - {name: certification_id, in: path, required: true, schema: {type: string}}
+      responses:
+        '200': {description: Evidence}
+  /api/v1/webhook/verify:
+    post:
+      summary: Verify an HMAC-SHA256 request
+      parameters:
+        - {name: X-IncuBrix-Signature, in: header, required: true, schema: {type: string}}
+      responses:
+        '200': {description: Signature valid}
+  /connector/v1/{connector_key}/{method}:
+    post:
+      summary: Appendix A connector method
+      parameters:
+        - {name: connector_key, in: path, required: true, schema: {type: string}}
+        - {name: method, in: path, required: true, schema: {type: string}}
+      responses:
+        '200': {description: Connector method result}
